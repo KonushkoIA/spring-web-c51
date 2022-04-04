@@ -24,7 +24,7 @@
         <option value="div">/</option>
     <input type="text" name="value2" placeholder="Value 2">
     <button>Result</button>
-    ${result}
+    ${msgResult}
 </form>
 
 </body>

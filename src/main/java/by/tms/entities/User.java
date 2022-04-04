@@ -1,7 +1,19 @@
-package by.tms;
+package by.tms.entities;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class User {
+	@NotBlank(message = "svoe ssobchenie")
+	@NotEmpty
 	private String name;
+	@NotBlank // " " true
+	@NotEmpty //"    " false
+	//  @Pattern()
+//	@Max(45)
+//	@Range(min = 3, max = 15)
+//	@Size()
+//	@Email(regexp = "")
 	private String password;
 
 	public User(String name, String password) {
