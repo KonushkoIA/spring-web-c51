@@ -15,7 +15,7 @@
 <body>
 <s:form action="/calc" method="post" modelAttribute="calcOperation">
     <s:input path="value1" placeholder="Value 1" />
-    <s:errors path="value1"/>
+    <s:errors path="value1" delimiter=", "/>
     <br>
 
     <s:select path="operation">
@@ -29,7 +29,7 @@
     <br>
 
     <s:input path="value2" placeholder="Value 2"/>
-    <s:errors path="value2"/>
+    <s:errors path="value2" delimiter=", "/>
     <br>
 
     <s:button>Result </s:button> ${msgResult}
