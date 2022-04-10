@@ -5,7 +5,6 @@ import by.tms.services.CalculationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +14,11 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/calc")
-public class CalcController {
+public class CalculatorController {
 
     @GetMapping
     public String calc(@Valid @ModelAttribute("calcOperation") Operation operation) {
-        return "calc";
+        return "Calculator/calc";
     }
 
     @PostMapping
@@ -36,9 +35,9 @@ public class CalcController {
 //        }
 
         if (bindingResult.hasErrors()) {
-            return "calc";
+            return "Calculator/calc";
         }
         model.addAttribute("msgResult", CalculationService.getResult(operation));
-        return "calc";
+        return "Calculator/calc";
     }
 }
