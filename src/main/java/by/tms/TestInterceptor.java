@@ -1,4 +1,4 @@
-package by.tms.controllers;
+package by.tms;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerAdapter;
@@ -15,7 +15,7 @@ public class TestInterceptor implements HandlerInterceptor {
         if (request.getSession().getAttribute("user") != null) {
             return true;
         }
-        response.sendRedirect("/");
+//        response.sendRedirect("/");
         return false;
     }
 

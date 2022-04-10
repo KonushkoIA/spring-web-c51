@@ -24,22 +24,21 @@ public class CalcController {
 
     @PostMapping
     public String result(@Valid @ModelAttribute("calcOperation")  Operation operation, BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasGlobalErrors()) {
-//			Map<String, String> map = new HashMap<>();
-            for (FieldError fieldError: bindingResult.getFieldErrors()) {
-                model.addAttribute(fieldError.getField(), fieldError.getDefaultMessage());
-//				map.put(fieldError.getField(), fieldError.getDefaultMessage());
-            }
-//		model.addAllAttributes(map);
-            return "calc";
-        }
+//
+//        if (bindingResult.hasGlobalErrors()) {
+////			Map<String, String> map = new HashMap<>();
+//            for (FieldError fieldError: bindingResult.getFieldErrors()) {
+//                model.addAttribute(fieldError.getField(), fieldError.getDefaultMessage());
+////				map.put(fieldError.getField(), fieldError.getDefaultMessage());
+//            }
+////		model.addAllAttributes(map);
+//            return "calc";
+//        }
 
         if (bindingResult.hasErrors()) {
             return "calc";
         }
-        Double resultValue = CalculationService.getResult(operation);
-        model.addAttribute("msgResult", String.valueOf(resultValue));
+        model.addAttribute("msgResult", CalculationService.getResult(operation));
         return "calc";
     }
 }
