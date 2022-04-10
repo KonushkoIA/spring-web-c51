@@ -8,22 +8,23 @@ public class User {
 
 	private long id;
 
-	@NotBlank(message = "svoe ssobchenie")
-	@NotEmpty
+//	@NotBlank(message = "svoe ssobchenie")
+//	@NotEmpty
 	private String name;
-	@NotBlank // " " true
-	@NotEmpty //"    " false
-	//  @Pattern()
-//	@Max(45)
+//	@NotBlank // " " true
+//	@NotEmpty //"    " false
 	@Range(min = 3, max = 50)
-//	@Size()
-//	@Email(regexp = "")
 	private String password;
+	private String email;
 
-	public User(Long id, String name, String password) {
+	public User() {
+	}
+
+	public User(Long id, String name, String password, String email) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
+		this.email = email;
 	}
 
 	public long getId() {
@@ -50,12 +51,21 @@ public class User {
 		this.password = password;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "User{" +
 				"id=" + id +
 				", name='" + name + '\'' +
 				", password='" + password + '\'' +
+				", email='" + email + '\'' +
 				'}';
 	}
 }

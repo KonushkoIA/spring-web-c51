@@ -18,7 +18,7 @@ public class CalculatorController {
 
     @GetMapping
     public String calc(@Valid @ModelAttribute("calcOperation") Operation operation) {
-        return "Calculator/calc";
+        return "calculator/calc";
     }
 
     @PostMapping
@@ -35,9 +35,9 @@ public class CalculatorController {
 //        }
 
         if (bindingResult.hasErrors()) {
-            return "Calculator/calc";
+            return "calculator/calc";
         }
         model.addAttribute("msgResult", CalculationService.getResult(operation));
-        return "Calculator/calc";
+        return "calculator/calc";
     }
 }
