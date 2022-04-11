@@ -8,13 +8,13 @@ public class User {
 
 	private long id;
 
-//	@NotBlank(message = "svoe ssobchenie")
-//	@NotEmpty
+	@NotBlank(message = "name empty")
 	private String name;
-//	@NotBlank // " " true
-//	@NotEmpty //"    " false
-	@Range(min = 3, max = 50)
+
+	@NotEmpty(message = "password empty")
 	private String password;
+
+	@NotEmpty(message = "email empty")
 	private String email;
 
 	public User() {

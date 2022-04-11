@@ -35,14 +35,13 @@ public class UserController {
 		return "user/user";
 	}
 
-	@GetMapping("/new")
-	public String newUser(Model model) {
-		model.addAttribute("newUser", new User());
+	@GetMapping("/reg")
+	public String newUser(@ModelAttribute("newUser") User user) {
 		return "user/reg";
 	}
 
-	@PostMapping()
-	public String createUser(@ModelAttribute("newUser") User user, BindingResult bindingResult, Model model) {
+	@PostMapping("/reg")
+	public String createUser(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			return "user/reg";
