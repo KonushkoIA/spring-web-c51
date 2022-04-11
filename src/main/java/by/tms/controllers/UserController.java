@@ -41,12 +41,30 @@ public class UserController {
 	}
 
 	@PostMapping("/reg")
-	public String createUser(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult, Model model) {
+	public String create(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			return "user/reg";
 		}
 		userDAO.save(user);
+		return "redirect:/user";
+	}
+
+	@GetMapping("/{id}/edit")
+	public String edit(Model model, @PathVariable("id") int id) {
+		model.addAttribute("user", userDAO.getById(id));
+		return "user/edit";
+	}
+
+	@PatchMapping("/{id}")
+	public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+		userDAO.update(id, user);
+		return "redirect:/user";
+	}
+
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable("id") int id) {
+		userDAO.delete(id);
 		return "redirect:/user";
 	}
 }
