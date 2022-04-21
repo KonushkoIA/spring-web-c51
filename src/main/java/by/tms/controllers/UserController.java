@@ -1,14 +1,13 @@
 package by.tms.controllers;
 
-import by.tms.dao.UserDAO;
+import by.tms.dao.Hibernate.UserDAOHibernate;
+import by.tms.dao.InMemory.UserDAOInMemory;
 import by.tms.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -16,22 +15,21 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
-	private final UserDAO userDAO;
 
 	@Autowired
-	public UserController(UserDAO userDAO) {
-		this.userDAO = userDAO;
-	}
+	private  UserDAOHibernate userDAOHibernate;
 
 	@GetMapping()
 	public String showAllUsers(Model model) {
-		model.addAttribute("users", userDAO.getAll());
+		//        model.addAttribute("users", userDAOInMemory.getAll());
+		model.addAttribute("users", userDAOHibernate.findAll());
 		return "user/users";
 	}
 
 	@GetMapping("/{id}")
-	public String showById(@PathVariable("id") int id, Model model) {
-		model.addAttribute("user", userDAO.getById(id));
+	public String showById(@PathVariable("id") long id, Model model) {
+//        model.addAttribute("user", userDAOInMemory.getById(id));
+		model.addAttribute("user", userDAOHibernate.findById(id));
 		return "user/user";
 	}
 
@@ -46,30 +44,35 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			return "user/reg";
 		}
-		userDAO.save(user);
+		//        userDAOInMemory.save(user);
+		userDAOHibernate.save(user);
 		return "redirect:/user";
 	}
 
 	@GetMapping("/{id}/edit")
-	public String edit(Model model, @PathVariable("id") int id) {
-		model.addAttribute("user", userDAO.getById(id));
+	public String edit(Model model, @PathVariable("id") long id) {
+		//       model.addAttribute("user", userDAOInMemory.getById(id));
+		model.addAttribute("user", userDAOHibernate.findById(id));
 		return "user/edit";
 	}
 
 	@PatchMapping("/{id}")
 	public String update(@ModelAttribute("user") @ Valid User user,
-						 BindingResult bindingResult, @PathVariable("id") int id) {
+						 BindingResult bindingResult, @PathVariable("id") long id) {
 
 		if (bindingResult.hasErrors()) {
 			return "user/edit";
 		}
-		userDAO.update(id, user);
+		//       userDAOInMemory.update(id, user);
+		userDAOHibernate.update(user);
 		return "redirect:/user";
 	}
 
 	@DeleteMapping("/{id}")
-	public String delete(@PathVariable("id") int id) {
-		userDAO.delete(id);
+	public String delete(@PathVariable("id") long id) {
+//        userDAOInMemory.delete(id);
+		User user = userDAOHibernate.findById(id);
+		userDAOHibernate.remove(user);
 		return "redirect:/user";
 	}
 }
