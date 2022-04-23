@@ -1,6 +1,6 @@
 package by.tms.configurations;
 
-import by.tms.TestInterceptor;
+import by.tms.interceptors.TestInterceptor;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;

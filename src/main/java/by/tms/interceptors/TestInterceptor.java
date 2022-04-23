@@ -1,4 +1,4 @@
-package by.tms;
+package by.tms.interceptors;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerAdapter;
