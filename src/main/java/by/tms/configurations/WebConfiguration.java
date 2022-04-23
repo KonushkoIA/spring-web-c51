@@ -81,7 +81,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter implements Applica
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/spring-web");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/spring-web-c51");
 		dataSource.setUsername("root");
 		dataSource.setPassword("admin");
 		return dataSource;
@@ -108,6 +108,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter implements Applica
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 		hibernateProperties.setProperty("show_sql", "true");
+		hibernateProperties.setProperty("format_sql", "false");
 		return hibernateProperties;
 	}
 }
