@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -25,16 +26,14 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan("by.tms")
+@EnableTransactionManagement
 @EnableWebMvc
 public class WebConfiguration extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
-	private final TestInterceptor testInterceptor;
+	@Autowired
+	private TestInterceptor testInterceptor;
 
 	private ApplicationContext applicationContext;
-
-	public WebConfiguration(TestInterceptor testInterceptor) {
-		this.testInterceptor = testInterceptor;
-	}
 
 	@Bean
 	public SpringResourceTemplateResolver templateResolver() {
@@ -108,7 +107,6 @@ public class WebConfiguration extends WebMvcConfigurerAdapter implements Applica
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 		hibernateProperties.setProperty("show_sql", "true");
-		hibernateProperties.setProperty("format_sql", "false");
 		return hibernateProperties;
 	}
 }
